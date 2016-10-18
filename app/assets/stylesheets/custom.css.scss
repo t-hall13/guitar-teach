@@ -1,12 +1,16 @@
 
 body {
-    background-image: asset-url('open_road_opt.jpg');
+    background-image: asset-url('Guitar-Teach-opt.jpg');
     background-size: cover;
     background-position: top;
     color: #fff;
 }
 .center {
     text-align: center;
+}
+
+.huge {
+    font-size: 3em;
 }
 
 .user-name {
