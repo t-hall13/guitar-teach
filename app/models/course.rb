@@ -1,4 +1,4 @@
-class Project < ActiveRecord::Base
+class Course < ActiveRecord::Base
   belongs_to :tenant
   validates_uniqueness_of :title
   has_many :artifacts, dependent: :destroy

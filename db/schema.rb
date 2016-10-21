@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161011132600) do
+ActiveRecord::Schema.define(version: 20161021040028) do
 
   create_table "artifacts", force: :cascade do |t|
     t.string   "name"
@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(version: 20161011132600) do
   end
 
   add_index "artifacts", ["project_id"], name: "index_artifacts_on_project_id"
+
+  create_table "courses", force: :cascade do |t|
+    t.string   "title"
+    t.string   "details"
+    t.date     "student since"
+    t.integer  "tenant_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "courses", ["tenant_id"], name: "index_courses_on_tenant_id"
 
   create_table "members", force: :cascade do |t|
     t.integer  "tenant_id"
@@ -44,17 +55,6 @@ ActiveRecord::Schema.define(version: 20161011132600) do
   end
 
   add_index "payments", ["tenant_id"], name: "index_payments_on_tenant_id"
-
-  create_table "projects", force: :cascade do |t|
-    t.string   "title"
-    t.string   "details"
-    t.date     "expected_completion_date"
-    t.integer  "tenant_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-  end
-
-  add_index "projects", ["tenant_id"], name: "index_projects_on_tenant_id"
 
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", null: false
@@ -84,15 +84,15 @@ ActiveRecord::Schema.define(version: 20161011132600) do
 
   add_index "tenants_users", ["tenant_id", "user_id"], name: "index_tenants_users_on_tenant_id_and_user_id"
 
-  create_table "user_projects", force: :cascade do |t|
-    t.integer  "project_id"
+  create_table "user_courses", force: :cascade do |t|
+    t.integer  "course_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "user_projects", ["project_id"], name: "index_user_projects_on_project_id"
-  add_index "user_projects", ["user_id"], name: "index_user_projects_on_user_id"
+  add_index "user_courses", ["course_id"], name: "index_user_courses_on_course_id"
+  add_index "user_courses", ["user_id"], name: "index_user_courses_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                        default: "",    null: false
