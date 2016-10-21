@@ -1,30 +1,30 @@
- <%- model_class = Project -%>
+ <%- model_class = Course -%>
 <div class="page-header white">
-  <h3><%= @project.title %></h3>
-  <h3><small>Organization - <%= tenant_name @project.tenant_id %></small></h3>
+  <h3><%= @course.title %></h3>
+  <h3><small>Organization - <%= tenant_name @course.tenant_id %></small></h3>
 </div>
 
 <dl class="dl-horizontal white">
   <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
-  <dd><%= @project.title %></dd>
+  <dd><%= @course.title %></dd>
   <dt><strong><%= model_class.human_attribute_name(:details) %>:</strong></dt>
-  <dd><%= @project.details %></dd>
+  <dd><%= @course.details %></dd>
   <dt><strong><%= model_class.human_attribute_name(:expected_completion_date) %>:</strong></dt>
-  <dd><%= @project.expected_completion_date %></dd>
+  <dd><%= @course.student_since %></dd>
   <dt><strong><%= model_class.human_attribute_name(:tenant_id) %>:</strong></dt>
-  <dd><%= @project.tenant_id %></dd>
+  <dd><%= @course.tenant_id %></dd>
 </dl>
 <h3>Artifacts</h3>
-<%= render 'artifacts/list', artifacts: @project.artifacts %>
+<%= render 'artifacts/list', artifacts: @course.artifacts %>
 <br/>
 <br/>
 <%= link_to '< Back to Organization Home', root_path, :class => 'btn btn-default'  %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_tenant_project_path(project: @project, tenant: @project.tenant_id), :class => 'btn btn-default' %>
-<%= link_to 'Edit Project Users', users_tenant_project_path(tenant_id: @project.tenant_id, id: @project.id),
+              edit_tenant_course_path(course: @course, tenant: @course.tenant_id), :class => 'btn btn-default' %>
+<%= link_to 'Edit course Users', users_tenant_course_path(tenant_id: @course.tenant_id, id: @course.id),
               :class => 'btn btn-default' %>              
 <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              tenant_project_path(@project, @project.tenant_id ),
+              tenant_course_path(@course, @course.tenant_id ),
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>

@@ -2,13 +2,13 @@ class Course < ActiveRecord::Base
   belongs_to :tenant
   validates_uniqueness_of :title
   has_many :artifacts, dependent: :destroy
-  has_many :user_projects
-  has_many :users, through: :user_projects
-  validate :free_plan_can_only_have_one_project
+  has_many :user_courses
+  has_many :users, through: :user_courses
+  validate :free_plan_can_only_have_one_course
   
-  def free_plan_can_only_have_one_project
-     if self.new_record? && (tenant.projects.count > 0) && (tenant.plan == 'free')
-       errors.add(:base, "Free plans cannot have multiple projects")
+  def free_plan_can_only_have_one_course
+     if self.new_record? && (tenant.courses.count > 0) && (tenant.plan == 'free')
+       errors.add(:base, "Free plans cannot have multiple courses")
      end
   end
   
@@ -16,15 +16,15 @@ class Course < ActiveRecord::Base
     tenant = Tenant.find(tenant_id)
     if tenant.plan == 'premium'
       if user.is_admin?
-        tenant.projects
+        tenant.courses
       else
-        user.projects.where(tenant_id: tenant.id)
+        user.courses.where(tenant_id: tenant.id)
       end
     else
       if user.is_admin?
-        tenant.projects.order(:id).limit(1)
+        tenant.courses.order(:id).limit(1)
       else
-        user.projects.where(tenant_id: tenant.id ).order(:id).limit(1)
+        user.courses.where(tenant_id: tenant.id ).order(:id).limit(1)
       end
     end
   end

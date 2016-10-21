@@ -1,33 +1,33 @@
-<%- model_class = Project -%>
+<%- model_class = Course -%>
 <div class="page-header">
   <h1 class='white'><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
-<% if @projects.size > 0 %>
+<% if @courses.size > 0 %>
   <table class="table table-striped">
     <thead>
       <tr>
         <th><%= model_class.human_attribute_name(:title) %></th>
         <th><%= model_class.human_attribute_name(:details) %></th>
-        <th><%= model_class.human_attribute_name(:expected_completion_date) %></th>
+        <th><%= model_class.human_attribute_name(:student_since) %></th>
         <th><%=t '.actions', :default => t("helpers.actions") %></th>
       </tr>
     </thead>
     <tbody>
-      <% @projects.each do |project| %>
+      <% @courses.each do |course| %>
         <tr>
-          <td><%= link_to project.title, 
-            tenant_project_path(project, tenant_id: @tenant.id), class: 'main-link' %></td>
-           <td><%= project.details %></td>
-          <td><%= project.expected_completion_date %></td> 
+          <td><%= link_to course.title, 
+            tenant_course_path(course, tenant_id: @tenant.id), class: 'main-link' %></td>
+           <td><%= course.details %></td>
+          <td><%= course.student_since %></td> 
           <td>
             <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                        edit_tenant_project_path(project, tenant_id: @tenant.id), :class => 'btn btn-default btn-xs' %>
+                        edit_tenant_course_path(course, tenant_id: @tenant.id), :class => 'btn btn-default btn-xs' %>
                         
-            <%= link_to 'Edit Users', users_tenant_project_path(project, tenant_id: @tenant.id),
+            <%= link_to 'Edit Users', users_tenant_course_path(course, tenant_id: @tenant.id),
                                             :class => 'btn btn-default btn-xs' %> 
             
             <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                        tenant_project_path(project, tenant_id: @tenant.id),
+                        tenant_course_path(course, tenant_id: @tenant.id),
                         :method => :delete,
                         :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                         :class => 'btn btn-xs btn-danger' %>
@@ -38,11 +38,11 @@
   </table>
   
 <% else %>
-  <p class='lead'>You don't have any projects</p>
+  <p class='lead'>You don't have any courses</p>
 <% end %>
 
-<% if (@tenant.can_create_projects?) %>
-  <%= link_to 'New Project',
-              new_tenant_project_path(tenant_id: @tenant.id),
+<% if (@tenant.can_create_courses?) %>
+  <%= link_to 'New course',
+              new_tenant_course_path(tenant_id: @tenant.id),
               :class => 'btn btn-primary' %>
  <% end %>
