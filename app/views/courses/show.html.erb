@@ -1,21 +1,20 @@
  <%- model_class = Course -%>
 <div class="page-header white">
   <h3><%= @course.title %></h3>
-  <h3><small>Organization - <%= tenant_name @course.tenant_id %></small></h3>
+  <h3><small><%= tenant_name @course.tenant_id %></small></h3>
 </div>
 
 <dl class="dl-horizontal white">
-  <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
+  <dt><strong><%= model_class.human_attribute_name(:student) %>:</strong></dt>
   <dd><%= @course.title %></dd>
   <dt><strong><%= model_class.human_attribute_name(:details) %>:</strong></dt>
   <dd><%= @course.details %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:expected_completion_date) %>:</strong></dt>
+  <dt><strong><%= model_class.human_attribute_name(:student_since) %>:</strong></dt>
   <dd><%= @course.student_since %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:tenant_id) %>:</strong></dt>
-  <dd><%= @course.tenant_id %></dd>
+ 
 </dl>
-<h3>Artifacts</h3>
-<%= render 'artifacts/list', artifacts: @course.artifacts %>
+<h3>Lessons</h3>
+<%= render 'lessons/list', lessons: @course.lessons %>
 <br/>
 <br/>
 <%= link_to '< Back to Organization Home', root_path, :class => 'btn btn-default'  %>

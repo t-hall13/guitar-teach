@@ -1,7 +1,7 @@
 class Course < ActiveRecord::Base
   belongs_to :tenant
   validates_uniqueness_of :title
-  has_many :artifacts, dependent: :destroy
+  has_many :lessons, dependent: :destroy
   has_many :user_courses
   has_many :users, through: :user_courses
   validate :free_plan_can_only_have_one_course

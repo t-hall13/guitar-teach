@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :user_courses
-  resources :artifacts
+  resources :lessons
   resources :tenants do
      resources :courses do 
        get 'users', on: :member

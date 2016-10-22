@@ -11,17 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161021051012) do
-
-  create_table "artifacts", force: :cascade do |t|
-    t.string   "name"
-    t.string   "key"
-    t.integer  "project_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "artifacts", ["project_id"], name: "index_artifacts_on_project_id"
+ActiveRecord::Schema.define(version: 20161022184525) do
 
   create_table "courses", force: :cascade do |t|
     t.string   "title"
@@ -33,6 +23,16 @@ ActiveRecord::Schema.define(version: 20161021051012) do
   end
 
   add_index "courses", ["tenant_id"], name: "index_courses_on_tenant_id"
+
+  create_table "lessons", force: :cascade do |t|
+    t.string   "name"
+    t.string   "key"
+    t.integer  "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "lessons", ["course_id"], name: "index_lessons_on_course_id"
 
   create_table "members", force: :cascade do |t|
     t.integer  "tenant_id"

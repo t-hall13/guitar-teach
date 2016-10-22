@@ -1,13 +1,13 @@
-<%= form_for @artifact, :html => { :class => "form-horizontal artifact" } do |f| %>
+<%= form_for @lesson, :html => { :class => "form-horizontal lesson" } do |f| %>
 
-  <% if @artifact.errors.any? %>
+  <% if @lesson.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@artifact.errors.count, "error") %> prohibited this artifact from being saved:</h3>
+        <h3 class="panel-title"><%= pluralize(@lesson.errors.count, "error") %> prohibited this lesson from being saved:</h3>
       </div>
       <div class="panel-body">
         <ul>
-        <% @artifact.errors.full_messages.each do |msg| %>
+        <% @lesson.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
         </ul>
@@ -28,14 +28,14 @@
     </div>
   </div>
   
-  <%= f.hidden_field :project_id %>
+  <%= f.hidden_field :course_id %>
 
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
       <%= f.submit nil, :class => 'btn btn-primary' %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                tenant_project_path(tenant_id: Tenant.current_tenant_id, 
-                id: @artifact.project_id), :class => 'btn btn-default' %>
+                tenant_course_path(tenant_id: Tenant.current_tenant_id, 
+                id: @lesson.course_id), :class => 'btn btn-default' %>
     </div>
   </div>
 
