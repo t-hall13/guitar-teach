@@ -1,8 +1,8 @@
 
 body {
-    background-image: asset-url('Guitar-Teach-opt.jpg');
-    background-size: cover;
-    background-position: top;
+    background-image: asset-url('Sound_Hole_opt_ii.jpg');
+    background-position: cover;
+    background-repeat: no-repeat;
     color: #fff;
 }
 .center {
@@ -11,6 +11,10 @@ body {
 
 .huge {
     font-size: 6em;
+}
+
+.studio-name {
+    color: #eaeaea;
 }
 
 .user-name {

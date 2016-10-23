@@ -1,7 +1,7 @@
  <%- model_class = Course -%>
 <div class="page-header white">
   <h3><%= @course.title %></h3>
-  <h3><small><%= tenant_name @course.tenant_id %></small></h3>
+  <h3><small class='studio-name'><%= tenant_name @course.tenant_id %></small></h3>
 </div>
 
 <dl class="dl-horizontal white">
@@ -17,7 +17,7 @@
 <%= render 'lessons/list', lessons: @course.lessons %>
 <br/>
 <br/>
-<%= link_to '< Back to Organization Home', root_path, :class => 'btn btn-default'  %>
+<%= link_to '< Back to Home', root_path, :class => 'btn btn-default'  %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_tenant_course_path(course: @course, tenant: @course.tenant_id), :class => 'btn btn-default' %>
 <%= link_to 'Edit course Users', users_tenant_course_path(tenant_id: @course.tenant_id, id: @course.id),

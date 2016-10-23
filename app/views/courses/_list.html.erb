@@ -1,12 +1,13 @@
 <%- model_class = Course -%>
 <div class="page-header">
-  <h1 class='white'><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <!--<h1 class='white'><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>-->
+  <h1>Students</h1>
 </div>
 <% if @courses.size > 0 %>
   <table class="table table-striped">
     <thead>
       <tr>
-        <th><%= model_class.human_attribute_name(:title) %></th>
+        <th><%= model_class.human_attribute_name(:student) %></th>
         <th><%= model_class.human_attribute_name(:details) %></th>
         <th><%= model_class.human_attribute_name(:student_since) %></th>
         <th><%=t '.actions', :default => t("helpers.actions") %></th>

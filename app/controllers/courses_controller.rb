@@ -66,7 +66,7 @@ class CoursesController < ApplicationController
   end
   
   def add_user
-    @course_user = Usercourse.new(user_id: params[:user_id], course_id: @course.id)
+    @course_user = UserCourse.new(user_id: params[:user_id], course_id: @course.id)
     
     respond_to do |format|
       if @course_user.save
