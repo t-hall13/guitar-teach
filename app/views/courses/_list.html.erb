@@ -42,8 +42,8 @@
   <p class='lead'>You don't have any courses</p>
 <% end %>
 
-<% if (@tenant.can_create_courses?) %>
+
   <%= link_to 'New course',
               new_tenant_course_path(tenant_id: @tenant.id),
               :class => 'btn btn-primary' %>
- <% end %>
+
