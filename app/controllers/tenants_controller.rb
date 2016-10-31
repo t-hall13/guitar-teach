@@ -1,9 +1,7 @@
 class TenantsController < ApplicationController 
   before_action :set_tenant
   
-  def show
-    @courses = @tenant.courses
-  end
+  
   
   def edit
     
@@ -11,31 +9,31 @@ class TenantsController < ApplicationController
   
   def update
     respond_to do |format|
-      #Tenant.transaction do 
+      Tenant.transaction do 
         if @tenant.update(tenant_params)
-          # if @tenant.plan == 'premium' && @tenant.payment.blank?
+          if @tenant.plan == 'premium' && @tenant.payment.blank?
             
-          #     @payment = Payment.new({ email: tenant_params["email"],
-          #       token: params[:payment]["token"],
-          #       tenant: @tenant
-          #     })
-          #     begin 
-          #       @payment.process_payment
-          #       @payment.save
-          #     rescue Exception => e   
-          #       flash[:error] = e.message
-          #       @payment.destroy
-          #       @tenant.plan = 'free'
-          #       @tenant.save
-          #       redirect_to edit_tenant_path(@tenant) and return
-          #     end
-          # end
+              @payment = Payment.new({ email: tenant_params["email"],
+                token: params[:payment]["token"],
+                tenant: @tenant
+              })
+              begin 
+                @payment.process_payment
+                @payment.save
+              rescue Exception => e   
+                flash[:error] = e.message
+                @payment.destroy
+                @tenant.plan = 'free'
+                @tenant.save
+                redirect_to edit_tenant_path(@tenant) and return
+              end
+          end
             format.html {redirect_to edit_plan_path, notice: "Plan was successfully updated" }
           else
             format.html { render :edit }
-          end
-        end 
-    #end
+        end
+    end 
+    end
   end
   
   def change
@@ -51,6 +49,6 @@ class TenantsController < ApplicationController
     end
     
     def tenant_params
-      params.require(:tenant).permit(:name, :plan)
+      params.require(:tenant).permit(:name)
     end
 end

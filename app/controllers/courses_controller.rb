@@ -12,7 +12,6 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
-    @course = Course.find(params[:id])
   end
 
   # GET /courses/new
@@ -74,7 +73,7 @@ class CoursesController < ApplicationController
         format.html { redirect_to users_tenant_course_url(id: @course.id, tenant_id: @course.tenant_id),
           notice: "User was successfully added to course" }
       else
-        format.html { redirect_to users_tenant_course_url(id: @course.id, tenant_id: @course.tentant_id),
+        format.html { redirect_to users_tenant_course_url(id: @course.id, tenant_id: @course.tenant_id),
           error: "User was not added to course" }
       end
     end

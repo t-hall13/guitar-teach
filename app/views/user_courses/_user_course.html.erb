@@ -12,6 +12,8 @@
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
               user_courses_path, :class => 'btn btn-default'  %>
+              
+<% if current_user.is_admin %>              
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_user_course_path(@user_course), :class => 'btn btn-default' %>
 <%= link_to 'Edit course Users', users_tenant_course_path(tenant_id: @course.tenant_id, id: @course.id), 
@@ -21,3 +23,5 @@
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
+              
+            

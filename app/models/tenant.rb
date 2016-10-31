@@ -3,12 +3,12 @@ class Tenant < ActiveRecord::Base
    acts_as_universal_and_determines_tenant
   has_many :members, dependent: :destroy
   has_many :courses, dependent: :destroy
-  # has_one :payment
-  # accepts_nested_attributes_for :payment
+  has_one :payment
+  accepts_nested_attributes_for :payment
   
-  # def can_create_courses?
-  #   (plan == 'free' && courses.count < 1) || (plan == 'premium')  
-  # end
+  def can_create_courses?
+    (plan == 'free' && courses.count < 1) || (plan == 'premium')  
+  end
   
   validates_uniqueness_of :name
   validates_presence_of :name
