@@ -1,4 +1,5 @@
 <%- model_class = Course -%>
+
 <div class="page-header">
   <!--<h1 class='white'><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>-->
   <h1>Student Courses</h1>
@@ -10,15 +11,9 @@
         <th><%= model_class.human_attribute_name(:student) %></th>
         <th><%= model_class.human_attribute_name(:details) %></th>
         <th><%= model_class.human_attribute_name(:student_since) %></th>
-<<<<<<< HEAD
-        <% if current_user.is_admin %>
-          <th><%=t '.actions', :default => t("helpers.actions") %></th>
-        <% end %>
-=======
       <% if current_user.is_admin %>
         <th><%=t '.actions', :default => t("helpers.actions") %></th>
       <% end %>  
->>>>>>> revamp-views-from-orig
       </tr>
     </thead>
     <tbody>
@@ -28,11 +23,7 @@
             tenant_course_path(course, tenant_id: @tenant.id), class: 'main-link' %></td>
            <td><%= course.details %></td>
           <td><%= course.student_since %></td> 
-<<<<<<< HEAD
-          <% if current_user.is_admin %>
-=======
         <% if current_user.is_admin %>  
->>>>>>> revamp-views-from-orig
           <td>
             <%= link_to t('.edit', :default => t("helpers.links.edit")),
                         edit_tenant_course_path(course, tenant_id: @tenant.id), :class => 'btn btn-default btn-xs' %>
@@ -46,11 +37,7 @@
                         :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                         :class => 'btn btn-xs btn-danger' %>
           </td>
-<<<<<<< HEAD
-          <% end %>
-=======
         <% end %>  
->>>>>>> revamp-views-from-orig
         </tr>
       <% end %>
     </tbody>
@@ -59,14 +46,6 @@
 <% else %>
   <p class='lead'>You don't have any courses</p>
 <% end %>
-<<<<<<< HEAD
-
-
-  <%= link_to 'New course',
-              new_tenant_course_path(tenant_id: @tenant.id),
-              :class => 'btn btn-primary' %>
-
-=======
 <% if current_user.is_admin %>
   <% if (@tenant.can_create_courses?) %>
     <%= link_to 'New course',
@@ -75,4 +54,3 @@
   <% end %>
 <% end %>  
   
->>>>>>> revamp-views-from-orig

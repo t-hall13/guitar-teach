@@ -18,20 +18,6 @@
 <br/>
 <br/>
 <%= link_to '< Back to Home', root_path, :class => 'btn btn-default'  %>
-<<<<<<< HEAD
-
-<% if current_user.is_admin %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_tenant_course_path(course: @course, tenant: @course.tenant_id), :class => 'btn btn-default' %>
-<%= link_to 'Edit course Users', users_tenant_course_path(tenant_id: @course.tenant_id, id: @course.id),
-              :class => 'btn btn-default' %>              
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              tenant_course_path(@course, @course.tenant_id ),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
-<% end %>
-=======
    <% if current_user.is_admin %> 
         <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_tenant_course_path(course: @course, tenant: @course.tenant_id), :class => 'btn btn-default' %>
@@ -44,4 +30,3 @@
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-danger' %>
  <% end %>
->>>>>>> revamp-views-from-orig
