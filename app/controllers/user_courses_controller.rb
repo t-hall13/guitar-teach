@@ -10,6 +10,7 @@ class UserCoursesController < ApplicationController
   # GET /user_courses/1
   # GET /user_courses/1.json
   def show
+    
   end
 
   # GET /user_courses/new

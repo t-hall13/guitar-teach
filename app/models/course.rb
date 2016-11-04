@@ -27,5 +27,5 @@ class Course < ActiveRecord::Base
         user.courses.where(tenant_id: tenant.id ).order(:id).limit(1)
       end
     end
-   end
+  end
 end
