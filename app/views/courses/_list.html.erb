@@ -1,79 +1,81 @@
 <%- model_class = Course -%>
 
-<div class="page-header">
+<div class='container'>
+  <div class="page-header">
   <!--<h1 class='white'><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>-->
   
-</div>
-<% if @tenant.courses.size  > 0  && current_user.is_admin %>
-  <h1>Student Courses</h1>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th><%= model_class.human_attribute_name(:student) %></th>
-            <th><%= model_class.human_attribute_name(:details) %></th>
-            <th><%= model_class.human_attribute_name(:student_since) %></th>
-          <% if current_user.is_admin %>
-            <th><%=t '.actions', :default => t("helpers.actions") %></th>
-          <% end %>  
-          </tr>
-        </thead>
-        <tbody>
-          <% @tenant.courses.each do |course| %>
-            <tr>
-              <td><%= link_to course.title, 
-                tenant_course_path(course, tenant_id: @tenant.id), class: 'main-link' %></td>
-               <td><%= course.details %></td>
-              <td><%= course.student_since %></td> 
-            <% if current_user.is_admin %>  
-              <td>
-                <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                            edit_tenant_course_path(course, tenant_id: @tenant.id), :class => 'btn btn-default btn-xs' %>
-                            
-                <%= link_to 'Edit Users', users_tenant_course_path(course, tenant_id: @tenant.id),
-                                                :class => 'btn btn-default btn-xs' %> 
-                
-                <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                            tenant_course_path(course, tenant_id: @tenant.id),
-                            :method => :delete,
-                            :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                            :class => 'btn btn-xs btn-danger' %>
-              </td>
-            <% end %>  
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-<% elsif current_user.courses.size > 0 %>
-
-   
-    <h1>Welcome, <%= @current_user.member.first_name %></h1>
+  </div>
+    <% if @tenant.courses.size  > 0  && current_user.is_admin %>
+      <h1>Student Courses</h1>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th><%= model_class.human_attribute_name(:student) %></th>
+                <th><%= model_class.human_attribute_name(:details) %></th>
+                <th><%= model_class.human_attribute_name(:student_since) %></th>
+              <% if current_user.is_admin %>
+                <th><%=t '.actions', :default => t("helpers.actions") %></th>
+              <% end %>  
+              </tr>
+            </thead>
+            <tbody>
+              <% @tenant.courses.each do |course| %>
+                <tr>
+                  <td><%= link_to course.title, 
+                    tenant_course_path(course, tenant_id: @tenant.id), class: 'main-link' %></td>
+                   <td><%= course.details %></td>
+                  <td><%= course.student_since %></td> 
+                <% if current_user.is_admin %>  
+                  <td>
+                    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                                edit_tenant_course_path(course, tenant_id: @tenant.id), :class => 'btn btn-default btn-xs' %>
+                                
+                    <%= link_to 'Edit Users', users_tenant_course_path(course, tenant_id: @tenant.id),
+                                                    :class => 'btn btn-default btn-xs' %> 
+                    
+                    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                                tenant_course_path(course, tenant_id: @tenant.id),
+                                :method => :delete,
+                                :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                                :class => 'btn btn-xs btn-danger' %>
+                  </td>
+                <% end %>  
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+    <% elsif current_user.courses.size > 0 %>
     
-    <table class="table table-striped">
-        <tbody>
-          <% @current_user.courses.each do |course| %>
-            <tr>
-              <td><%= link_to 'Your Course', 
-                tenant_course_path(course, tenant_id: @tenant.id), class: 'main-link' %></td>
-               <td><%= course.details %></td>
-              <td><%= course.student_since %></td> 
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-  
-  
-<% else %>
-   
-    <h1>Welcome, <%= @current_user.member.first_name %></h1>
-
-    <p class='lead'>You don't have any courses</p>
-<% end %>
-
-<% if current_user.is_admin %>
-  <% if (@tenant.can_create_courses?) %>
-    <%= link_to 'New course',
-              new_tenant_course_path(tenant_id: @tenant.id),
-              :class => 'btn btn-primary' %>
-  <% end %>
-<% end %>  
+       
+        <h1>Welcome, <%= @current_user.member.first_name %></h1>
+        
+        <table class="table table-striped">
+            <tbody>
+              <% @current_user.courses.each do |course| %>
+                <tr>
+                  <td><%= link_to 'Your Course', 
+                    tenant_course_path(course, tenant_id: @tenant.id), class: 'main-link' %></td>
+                   <td><%= course.details %></td>
+                  <td><%= course.student_since %></td> 
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+      
+      
+    <% else %>
+       
+        <h1>Welcome, <%= @current_user.member.first_name %></h1>
+    
+        <p class='lead'>You don't have any courses</p>
+    <% end %>
+    
+    <% if current_user.is_admin %>
+      <% if (@tenant.can_create_courses?) %>
+        <%= link_to 'New course',
+                  new_tenant_course_path(tenant_id: @tenant.id),
+                  :class => 'btn btn-primary' %>
+      <% end %>
+    <% end %>
+</div>  
  
