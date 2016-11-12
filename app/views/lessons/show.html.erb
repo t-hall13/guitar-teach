@@ -7,13 +7,13 @@
   <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
   <dd><%= @lesson.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:key) %>:</strong></dt>
-  <dd><%= @lesson.key %></dd>
+  <dd><%= s3_link Tenant.current_tenant_id, lesson.key %></dd>
   <dt><strong><%= model_class.human_attribute_name(:course_id) %>:</strong></dt>
   <dd><%= @lesson.course_id %></dd>
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
-              lessons_path, :class => 'btn btn-default'  %>
+              lessons_path(@course), :class => 'btn btn-default'  %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_lesson_path(@lesson), :class => 'btn btn-default' %>
 <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
