@@ -32,6 +32,7 @@ class LessonsController < ApplicationController
         format.html { redirect_to tenant_course_url(tenant_id: Tenant.current_tenant_id, 
           id: @lesson.course_id), notice: 'lesson was successfully created.' }
         format.json { render :show, status: :created, location: @lesson }
+        UserNotifier.send_update_email(@lesson).deliver
       else
         format.html { render :new }
         format.json { render json: @lesson.errors, status: :unprocessable_entity }
