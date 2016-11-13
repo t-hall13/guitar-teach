@@ -4,8 +4,9 @@ class UserNotifier < ApplicationMailer
   # send a signup email to the user, pass in the user object that   contains the user's email address
   def send_update_email(lesson)
     @lesson = lesson
-     @lesson.course.users.each do |lcu|
-    mail( :to => lcu.email,
+    @students = @lesson.course.users(is_admin: false)
+     @students.each do |student|
+    mail( :to => student.email,
     :subject => 'There is an update in your user area.' )
     end
   end
