@@ -3,7 +3,7 @@ class Lesson < ActiveRecord::Base
   attr_accessor :upload
   belongs_to :course
   
-  MAX_FILESIZE = 10.megabytes
+  MAX_FILESIZE = 200.megabytes
   validates_presence_of :name, :upload
   validates_uniqueness_of :name
   
