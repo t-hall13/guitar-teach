@@ -2,7 +2,20 @@
  <h3 class='pull-right '><%= @tenant.name %></h3>
  
  
- <%= render 'courses/list' %>
+ <%= render 'courses/list' %></br>
+ <div class='row'>
+   <div class='col-md-4'>
+    <%= render 'layouts/video' %>
+   </div>
+   <div class= 'col-md-4'>
+     <p>
+       This is just some text to test the look of the this element. 
+      It could contain a calendar, or tips, or links to payment forms.
+     </p>
+   </div>
+ </div>
+ 
+ 
  
  
   
@@ -10,9 +23,7 @@
 
  <div class='jumbotron center'>
      <h1 class='huge'>Guitar Teach</h1></br>
-     <div class="embed-responsive embed-responsive-16by9">
-       <iframe class="embed-responsive-item"src="https://www.youtube.com/embed/giZPMjt57TI"  allowfullscreen></iframe>
-     </div>
+      <%= render 'layouts/video' %>
      <!--<div class='center'> -->
      <!--    <p class='lead'>-->
      <!--    Centralized Resources for your Students.-->

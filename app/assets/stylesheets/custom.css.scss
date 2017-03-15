@@ -169,3 +169,9 @@ table tr td {
     color: #fff !important;
     padding-bottom: 5px;
 }
+
+.smaller-video iframe {
+    max-width: 60%;
+    max-height: 60%;
+    position: center;
+}

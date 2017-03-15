@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :user_courses
   resources :lessons
+  
   resources :tenants do
      resources :courses do 
        get 'users', on: :member
@@ -9,6 +10,7 @@ Rails.application.routes.draw do
    end
   resources :members
   get 'home/index'
+  get 'public/index'
 
    root :to => "home#index"
 
