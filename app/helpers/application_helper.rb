@@ -33,7 +33,7 @@ module ApplicationHelper
   end
   
   def s3_link(tenant_id, lesson_key)
-    link_to lesson_key, "#{lesson_key}", class: 'main-link', target: 'new'
+    link_to lesson_key, "#{lesson_key}", class: 'lesson-link', target: 'new'
   end
   
   def class_name_for_tenant_form(tenant)
