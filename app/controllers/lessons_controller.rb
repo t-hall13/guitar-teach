@@ -59,7 +59,7 @@ class LessonsController < ApplicationController
   def destroy
     @lesson.destroy
     respond_to do |format|
-      format.html { redirect_to tenant_project_url(tenant_id: Tenant.current_tenant_id, 
+      format.html { redirect_to tenant_course_url(tenant_id: Tenant.current_tenant_id, 
         id: @lesson.course_id), notice: 'lesson was successfully destroyed.' }
       format.json { head :no_content }
     end
