@@ -1,10 +1,11 @@
 class Lesson < ActiveRecord::Base
-  before_save :upload_to_s3 
+  before_save :upload_to_s3, on: :create
+  before_update :match_s3_key 
   attr_accessor :upload
   belongs_to :course
   
   MAX_FILESIZE = 200.megabytes
-  validates_presence_of :name, :upload
+  validates_presence_of [:name, :upload], on: :create
   validates_uniqueness_of :name
   
   validate :uploaded_file_size
@@ -14,11 +15,17 @@ class Lesson < ActiveRecord::Base
   private
   
   def upload_to_s3
-    s3=Aws::S3::Resource.new
-    tenant_name = Tenant.find(Thread.current[:tenant_id]).name
-    obj = s3.bucket(ENV['S3_BUCKET']).object("#{tenant_name}/#{upload.original_filename}")
-    obj.upload_file(upload.path,acl:'public-read')
-    self.key = obj.public_url
+    unless self.key?
+      s3=Aws::S3::Resource.new
+      tenant_name = Tenant.find(Thread.current[:tenant_id]).name
+      obj = s3.bucket(ENV['S3_BUCKET']).object("#{tenant_name}/#{upload.original_filename}")
+      obj.upload_file(upload.path,acl:'public-read')
+      self.key = obj.public_url
+    end
+  end
+  
+  def match_s3_key
+    upload_to_s3 unless self.key?
   end
   
   def uploaded_file_size
