@@ -28,10 +28,11 @@ class LessonsController < ApplicationController
 
     respond_to do |format|
       if @lesson.save
+        UserNotifier.send_update_email(@lesson).deliver
         format.html { redirect_to tenant_course_url(tenant_id: Tenant.current_tenant_id, 
           id: @lesson.course_id), notice: 'lesson was successfully created.' }
         format.json { render :show, status: :created, location: @lesson }
-        UserNotifier.send_update_email(@lesson).deliver
+        
       else
         format.html { render :new }
         format.json { render json: @lesson.errors, status: :unprocessable_entity }
@@ -44,9 +45,9 @@ class LessonsController < ApplicationController
   def update
     respond_to do |format|
       if @lesson.update(lesson_params)
+        UserNotifier.send_update_email(@lesson).deliver
         format.html { redirect_to @lesson, notice: 'lesson was successfully updated.' }
         format.json { render :show, status: :ok, location: @lesson }
-        UserNotifier.send_update_email(@lesson).deliver
       else
         format.html { render :edit }
         format.json { render json: @lesson.errors, status: :unprocessable_entity }
