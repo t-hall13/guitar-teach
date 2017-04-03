@@ -45,7 +45,11 @@ class LessonsController < ApplicationController
   def update
     respond_to do |format|
       if @lesson.update(lesson_params)
-        UserNotifier.send_update_email(@lesson).deliver
+        @students = @lesson.course.users
+            @students.find_each do |student|
+              UserNotifier.send_update_email(@lesson).deliver 
+           end
+        
         format.html { redirect_to @lesson, notice: 'lesson was successfully updated.' }
         format.json { render :show, status: :ok, location: @lesson }
       else
