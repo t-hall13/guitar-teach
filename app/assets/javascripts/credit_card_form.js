@@ -26,7 +26,7 @@ $(document).ready(function(){
      }
      return false;
    };
-// Initiate submit handler listener fo any form with class cc_form
+// Initiate submit handler listener for any form with class cc_form
   $(".cc_form").on('submit', submitHandler);
 // handle event of plan drop down changing
   var handlePlanChange = function(plan_type, form) {

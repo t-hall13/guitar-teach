@@ -1,5 +1,7 @@
 <% if current_user %>
- <h3 class='pull-right '><%= @tenant.name %></h3>
+ 
+ <div class= 'container'>
+  <h3 class='pull-right '><%= @tenant.name %></h3>
  
  
  <%= render 'courses/list' %></br>
@@ -14,16 +16,18 @@
      </p>
    </div>
     <div class= 'col-md-4'>
-     <p>
-        <%= link_to 'Make your lesson payment here!', new_charge_path %> 
-       
-     </p>
+     <% unless current_user.is_admin %>
+       <p>
+          Make your lesson payment here! 
+         <%= render 'charges/new' %>
+       </p>
+      <% end %>
    </div>
  </div>
  
  
  
- 
+ </div>
   
 <% else %>
 
