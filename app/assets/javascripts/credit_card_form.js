@@ -12,7 +12,7 @@
   }
 
 $(document).ready(function(){
-  
+  Stripe.setPublishableKey($('pk_test_i5nNNu0x6FAM77eMlEUz35tt'));  
   var show_error, stripeResponseHandler, submitHandler; 
 
 // function to handle submission of the form and intercept the default event
