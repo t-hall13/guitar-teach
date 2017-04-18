@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :user_courses
   resources :lessons
   resources :charges
+  resources :contacts, only: [:new, :create]
   resources :tenants do
      resources :courses do 
        get 'users', on: :member
