@@ -3,29 +3,36 @@
  <div class= 'container'>
   <h3 class='pull-right '><%= @tenant.name %></h3>
  
- 
+   
  <%= render 'courses/list' %></br>
+ 
+  <% unless current_user.is_admin %>
  <div class='row'>
    <div class='col-md-4'>
     <%= render 'layouts/video' %>
    </div>
+   
    <div class= 'col-md-4'>
      <p>
-       This is just some text to test the look of the this element. 
-      It could contain a calendar, or tips, or links to payment forms.
+      Have a question? Need to reschedule?
+      </br>
+      </br>
+      <%= link_to 'Contact Me', new_contact_path, class: 'btn btn-primary' %>
      </p>
+    
    </div>
     <div class= 'col-md-4'>
-     <% unless current_user.is_admin %>
+  
        <p>
           Make your lesson payment here! 
          <%= render 'charges/new' %>
        </p>
-      <% end %>
+     
    </div>
+    
  </div>
  
- 
+ <% end %>
  
  </div>
   
