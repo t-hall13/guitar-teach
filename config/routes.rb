@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :members
   get 'home/index'
   get 'public/index'
+  get "new" => 'contacts#new', as: :new
 
    root :to => "home#index"
 

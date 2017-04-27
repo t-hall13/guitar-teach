@@ -1,10 +1,21 @@
 class ContactsController < ApplicationController
+    
+    
+    
     def new
-       @contact = Contact.new  
+       @contact = Contact.new 
+       
     end
+    
+    
+    
     
     def create
        @contact = Contact.new(params[:contact])
+       respond_to do |format|
+            format.js
+            format.html
+        end
        @contact.request = request
        if @contact.deliver
            flash.now[:error]=nil
@@ -13,4 +24,5 @@ class ContactsController < ApplicationController
            render :new
        end 
     end
+    
 end
