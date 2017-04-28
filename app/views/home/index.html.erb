@@ -5,38 +5,28 @@
  <div class= 'container'>
   <h3 class='pull-right '><%= @tenant.name %></h3>
   
- <%= render 'courses/list' %></br>
+ <%= render 'courses/list'%>
  
   <% unless current_user.is_admin %>
   
- <div class='row'>
-   <div class='col-md-4'>
-    <%= render 'layouts/video' %>
-   </div>
-   
-   <div class= 'col-md-4'>
-     <p>
-      Have a question? Need to reschedule?
-      </br>
-      </br>
-     </p>
-      <%= link_to 'Contact', new_contact_path,  {:remote => true, 'data-toggle' => "modal", 'data-target' => '#modal-window', class: 'btn btn-primary'} %>
-
-    </div> 
-
-     <div id="modal-window" class='modal-fade'  role="dialog" aria-labelledby="myModalLabel" aria-hidden='true'>
+   <div id="modal-window" class='modal-fade'  role="dialog" aria-labelledby="myModalLabel" aria-hidden='true'>
       <div class='modal-dialog' role='document'>
          <div class='modal-content'></div>
       </div>
      </div>
-     
-    <div class= 'col-md-4'>
   
-       <p>
-          Make your lesson payment here! 
-         <%= render 'charges/new' %>
-       </p>
-     
+ <div class='row'>
+   <div class='col-md-10'>
+    <%= render 'layouts/video' %>
+   </div>
+   
+   <div class= 'col-md-2 container-fluid'>
+     <ul class= 'index-aside'>
+       <li>Have a question? Need to reschedule?</li>
+       <li><%= link_to 'Contact', new_contact_path,  {:remote => true, 'data-toggle' => "modal", 'data-target' => '#modal-window', class: 'btn btn-primary'} %></li></br>
+       <li> Make your lesson payment here! </li>
+       <li> <%= render 'charges/new' %></li>
+     </ul>
    </div>
     
  </div>

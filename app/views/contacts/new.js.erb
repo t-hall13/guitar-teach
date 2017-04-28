@@ -1,3 +1,7 @@
 
    $("#modal-window").find(".modal-content").html("<%= escape_javascript(  render  'contacts/new') %>");
-        
+       $('#modal-close').click(function(){ $('#modal-window').toggle(); 
+           
+       })
+           
+       
