@@ -1,20 +1,81 @@
-<div class= 'col-md-5  'text-center''>
+<div>
     <%= form_tag charges_path do %>
-    <article >
+     <div id='error-explanation'>
         <% if flash[:error].present? %>
-            <div id='error-explanation'>
-                <p><%= flash[:error] %></p>
-            </div>
+            <p><%= flash[:error] %></p>
         <% end %>
-        <label class='amount'>
-            <span>Amount: $25.00</span>
-        </label>
-    </article>
-    
-        <script src="https://checkout.stripe.com/checkout.js" class= 'stripe-button'
-            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-            data-description= "Lesson payment"
-            data-amount= "2500"
-            data-locale="auto"></script>
+     </div>
+     
+     
+    <!-- <form class="form-inline">-->
+    <!--      <div class="form-group">-->
+    <!--        <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>-->
+    <!--        <div class="input-group">-->
+    <!--          <div class="input-group-addon">$</div>-->
+    <!--          <input type="text" class="form-control" id="paymentButton" placeholder="00">-->
+    <!--          <div class="input-group-addon">.00</div>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--      <button type="submit" id= 'paymentButton' class="btn btn-primary">Pay</button>-->
+    <!--</form>-->
+     <div class='form-group'>     
+        <%= label_tag :amount, 'Amount:', :class => "sr-only" %>
+        <%= text_field_tag :amount, params[:amount], :class => 'payment-text form-control', :placeholder =>'Amount' %></br>
+        <%= text_field_tag :metadata, params[:metadata], :class => 'payment-text form-control', :placeholder =>'Add details' %>
+        
+    </div>
+    <div>
+        <%= hidden_field_tag(:stripeToken) %>
+    </div>
+      <button id='paymentButton', class= 'btn btn-primary btn-block'>Pay</button> 
     <% end %>
+    
+    
+    
+    
+    
+     <script src="https://checkout.stripe.com/checkout.js"></script>
+     
+     <script>
+         var handler = StripeCheckout.configure({
+             key: '<%= Rails.configuration.stripe[:publishable_key] %>',
+             locale: 'auto',
+             name: 'Guitar Teach',
+             description: 'Lesson payment',
+             token: function(token) {
+                 $('input#stripeToken').val(token.id);
+                 $('form').submit();
+             }
+         });
+         
+         $('#paymentButton').on('click', function(e) {
+              e.preventDefault();
+            
+              $('#error_explanation').html('');
+            
+              var amount = $('input#amount').val();
+              amount = amount.replace(/\$/g, '').replace(/\,/g, '')
+            
+              amount = parseFloat(amount);
+            
+              if (isNaN(amount)) {
+                $('#error_explanation').html('<p>Please enter a valid amount in USD ($).</p>');
+              }
+              else if (amount < 25.00) {
+                $('#error_explanation').html('<p>Payment amount must be at least $25.</p>');
+              }
+              else {
+                amount = amount * 100; // Needs to be an integer!
+                handler.open({
+                  amount: Math.round(amount)
+                })
+              }
+            });
+        // Close Checkout on page navigation
+            $(window).on('popstate', function() {
+              handler.close();
+            });    
+     </script>
+           
+    
 </div>

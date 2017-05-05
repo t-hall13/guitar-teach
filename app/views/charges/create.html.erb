@@ -1,6 +1,8 @@
 
 
 <div class='container'>
-    <h2 class='center'>Thanks, you paid <strong>$25.00</strong>!</h2>
+    <h2>Thank you!</h2>
+    <p>Your payment of <strong><%= number_to_currency(@amount * 0.01) %></strong>
+         has been received.</p>
     <%= link_to 'Back', :back, class: 'btn btn-default' %>
 </div>

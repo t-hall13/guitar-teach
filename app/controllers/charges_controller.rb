@@ -5,24 +5,38 @@ class ChargesController < ApplicationController
     end
     
     def create
-       #Amount in cents
-       @amount = 2500
-       
-       customer = Stripe::Customer.create(
-           :email => params[:stripeEmail],
-           :source => params[:stripeToken]
-           )
-           
-        charge = Stripe::Charge.create(
-            :customer => customer.id,
+          @amount = params[:amount]
+        
+          @amount = @amount.gsub('$', '').gsub(',', '')
+        
+          begin
+            @amount = Float(@amount).round(2)
+          rescue
+            flash[:error] = 'Charge not completed. Please enter a valid amount in USD ($).'
+            redirect_to new_charge_path
+            return
+          end
+        
+          @amount = (@amount * 100).to_i # Must be an integer!
+        
+          if @amount < 2500
+            flash[:error] = 'Charge not completed. Payment amount must be at least $25.'
+            redirect_to new_charge_path
+            return
+          end
+        
+          Stripe::Charge.create(
             :amount => @amount,
-            :description => 'Rails Stripe customer',
-            :currency => 'usd'
-            )
-            
-                rescue Stripe::CardError(message)
-                    flash[:error]= message
-                    redirect_to new_charge_path
+            :currency => 'usd',
+            :source => params[:stripeToken],
+            :description => 'Lesson Payment from ' + current_user.email,
+            :metadata => @metadata
+          )
+        
+          rescue Stripe::CardError => e
+            flash[:error] = e.message
+            redirect_to new_charge_path
     end
-    
 end
+    
+
