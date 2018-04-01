@@ -30,7 +30,7 @@ class ChargesController < ApplicationController
             :currency => 'usd',
             :source => params[:stripeToken],
             :description => 'Lesson Payment from ' + current_user.email,
-            :metadata => @metadata
+            :metadata => @details
           )
         
           rescue Stripe::CardError => e
